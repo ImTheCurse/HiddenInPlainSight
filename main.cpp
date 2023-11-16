@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
+#include "src/Encode.hpp"
+
 using namespace cv;
 int main(int argc, char** argv )
 {
@@ -15,8 +17,10 @@ int main(int argc, char** argv )
         printf("No image data \n");
         return -1;
     }
-    namedWindow("Display Image", WINDOW_AUTOSIZE );
-    imshow("Display Image", image);
+    Encode enc(image,"hello","newroad.png");
+    enc.initMarkingChannel();
+    //namedWindow("Display Image", WINDOW_AUTOSIZE );
+    //imshow("Display Image", image);
     waitKey(0);
     return 0;
 }

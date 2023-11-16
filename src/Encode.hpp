@@ -23,7 +23,7 @@ struct ColorRGB{
 class Encode{
 public:
 
-Encode(cv::Mat image,std::string msg);
+Encode(cv::Mat image,std::string msg,std::string fileName);
 
 //setters
 
@@ -43,6 +43,7 @@ void rankPixel(Point cord,int posInStringBatch ,Channel chan = Channel::BLUE);
 
 private:
     cv::Mat _img;
+    std::string _fileName;
     std::string _messageToEncode;
     std::vector<std::pair<Point,ColorRGB>> _pixelsToEncode;
     Point _currentCord;
