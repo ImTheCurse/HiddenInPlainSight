@@ -2,7 +2,7 @@
 #include <opencv2/opencv.hpp>
 #include "src/Encode.hpp"
 
-using namespace cv;
+
 int main(int argc, char** argv )
 {
     if ( argc != 2 )
@@ -10,8 +10,8 @@ int main(int argc, char** argv )
         printf("usage: DisplayImage.out <Image_Path>\n");
         return -1;
     }
-    Mat image;
-    image = imread( argv[1], IMREAD_COLOR );
+    cv::Mat image;
+    image = cv::imread( argv[1], cv::IMREAD_COLOR );
     if ( !image.data )
     {
         printf("No image data \n");
@@ -19,8 +19,14 @@ int main(int argc, char** argv )
     }
     Encode enc(image,"hello","newroad.png");
     enc.initMarkingChannel();
+    Point newPoint;
+    newPoint = enc.findClosestColorPixel(500,'z');
+    
+
+
+    
     //namedWindow("Display Image", WINDOW_AUTOSIZE );
     //imshow("Display Image", image);
-    waitKey(0);
+    cv::waitKey(0);
     return 0;
 }
