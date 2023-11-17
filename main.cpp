@@ -20,7 +20,7 @@ int main(int argc, char** argv )
     Encode enc(image,"hello","newroad.png");
     enc.initMarkingChannel();
     Point newPoint;
-    newPoint = enc.findClosestColorPixel(500,'z');
+    
     
 
 
