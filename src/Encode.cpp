@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <limits>
+#include <stdexcept>
 #include <opencv2/imgcodecs.hpp>
 
 #define RGB_CHANNEL_LIMIT 255
@@ -11,13 +12,73 @@ Encode::Encode(cv::Mat image,std::string msg,std::string fileName,int numOfThrea
 : _img(image) ,_messageToEncode(msg),_fileName(fileName),_numOfThreads(numOfThreads) , encodeChan(encChan),markingChan(markChan),rankingChan(rankChan)
 {
 
+    initMarkingChannel();
+
     
+    int numOfCols = _img.cols;
+    int currentCol = 0;
+    std::vector<std::thread> threads;
+    std::string tenCharString;
+
+    while(!_messageToEncode.empty() && (currentCol < _img.cols)){
+        //no need for mutex because we are writing to diffrent memory segments.
+        //for loop to create the threads
+        for(int i = 0;i < _numOfThreads;i++){
+            tenCharString = _messageToEncode.substr(0,10);
+            try{
+            _messageToEncode = _messageToEncode.substr(10);
+            }catch(const std::out_of_range& err){
+                std::cout<<"Finising encoding string..."<<std::endl;
+                _messageToEncode.clear();
+                threads.push_back(std::thread(&Encode::encodeTenPixels,this,currentCol,tenCharString));
+                for(auto &i: threads){
+                    if(i.joinable()){
+                    i.join();
+                    }
+                }
+                writeToImage();
+                return;
+                
+            }
+            threads.push_back(std::thread(&Encode::encodeTenPixels,this,currentCol,tenCharString));
+            currentCol++;
+        }
+
+        for(auto &i: threads){
+            if(i.joinable()){
+                i.join();
+            }
+        }
+    }
+
+    if(!_messageToEncode.empty()){
+        std::cout<< "Error: message to encode to big or images size to small to encode current message. encoded the entire images without a part of the message."<<std::endl;
+    }
+    writeToImage();
 
 
 }
 
-void Encode::encodeSinglePixel(const int rowStartPixel,const int rowEndPixel,const int colStartPixel,const int colEndPixel)
+void Encode::encodeTenPixels(const int col, std::string tenCharString)
 {
+    for(int i = 0;i < 10;i++){
+        if(i< tenCharString.length())
+            encodeSinglePixel(col,tenCharString[i],i);
+    }
+
+}
+
+void Encode::encodeSinglePixel(const int col, char c,int charIndex)
+{
+    
+    Point closestPoint;
+    closestPoint = findClosestColorPixel(col,c);
+
+    
+    setPixelToAscii(closestPoint,c);
+    rankPixel(closestPoint,charIndex);
+
+
 }
 
 void Encode::writeToImage()

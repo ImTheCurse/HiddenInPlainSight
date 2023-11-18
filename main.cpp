@@ -17,9 +17,8 @@ int main(int argc, char** argv )
         printf("No image data \n");
         return -1;
     }
-    Encode enc(image,"hello","newroad.png");
-    enc.initMarkingChannel();
-    Point newPoint;
+    Encode enc(image,"Lorem Ipsum is simply dummy text that blah blah blah","lena.png");
+    
     
     
 

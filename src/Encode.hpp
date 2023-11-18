@@ -29,7 +29,9 @@ public:
 Encode(cv::Mat image,std::string msg,std::string fileName,int numOfThreads = std::thread::hardware_concurrency(),
 Channel encChan = Channel::RED,Channel markChan = Channel::GREEN,Channel rankChan = Channel::BLUE);
 
-void encodeSinglePixel(const int rowStartPixel,const int rowEndPixel,const int colStartPixel,const int colEndPixel);
+void encodeTenPixels(const int col, std::string tenCharString);
+
+void encodeSinglePixel(const int col, char c,int charIndex);
 //setters
 
 void writeToImage();
