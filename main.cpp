@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include "src/Encode.hpp"
+#include "src/Decode.hpp"
 
 
 int main(int argc, char** argv )
@@ -17,8 +18,10 @@ int main(int argc, char** argv )
         printf("No image data \n");
         return -1;
     }
-    Encode enc(image,"Lorem Ipsum is simply dummy text that blah blah blah","lena.png");
+
     
+        Encode enc(image,"what the fucking hell is this","lena.png");
+        //Decode dec(image);
     
     
 

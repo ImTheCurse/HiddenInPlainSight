@@ -6,8 +6,8 @@ add_executable( HIPS
 main.cpp 
 src/Encode.cpp
 src/Encode.hpp
-
-
+src/Decode.cpp
+src/Decode.hpp
 
 )
 target_link_libraries( HIPS ${OpenCV_LIBS} )

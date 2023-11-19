@@ -83,7 +83,13 @@ void Encode::encodeSinglePixel(const int col, char c,int charIndex)
 
 void Encode::writeToImage()
 {
-    cv::imwrite("enc_"+_fileName,_img);
+    std::vector<int> compression_params;
+    compression_params.push_back(cv::IMWRITE_PNG_COMPRESSION);
+    compression_params.push_back(0);
+    compression_params.push_back(cv::IMWRITE_PNG_STRATEGY_RLE);
+    compression_params.push_back(1);
+    
+    cv::imwrite("enc_"+_fileName,_img,compression_params);
 
 }
 
@@ -111,7 +117,7 @@ void Encode::initMarkingChannel()
 
 void Encode::setPixelToAscii(const Point cord,char c)
 {
-    _img.at<cv::Vec3b>(cord.x,cord.y).val[encodeChan] = (int)c;
+    _img.at<cv::Vec3b>(cord.x,cord.y).val[encodeChan] = c;
     markPixel(cord);
 }
 
