@@ -52,8 +52,7 @@ Decoded file will be saved to HiddenInPlainSight directory.
 
 ## Disclaimer
 
-Do not use this program to encrypt and hide important data which you wish to keep away from prying eyes. This is just a simple proof-of-concept program that I made for fun.
-I'm no cryptographer. I'm just a hobbyist, use at your own risk.
+This program is a proof-of-concept, and should not be intended for transfring important information, and I won't be liable for any damagaes caused by this program.
 
 ## Copyright
 
