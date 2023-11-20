@@ -49,4 +49,12 @@ decoding image example:
 ./HIPS -i enc_file.png -d
 ```
 Decoded file will be saved to HiddenInPlainSight directory.
-   
+
+## Disclaimer
+
+Do not use this program to encrypt and hide important data which you wish to keep away from prying eyes. This is just a simple proof-of-concept program that I made for fun.
+I'm no cryptographer. I'm just a hobbyist, use at your own risk.
+
+## Copyright
+
+This software is licensed under MIT. Copyright © 2022 Rani Giro
