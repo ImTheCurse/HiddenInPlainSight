@@ -7,6 +7,14 @@ it uses an algorithm that I've developed in which there are 3 steps to encoding 
 :pushpin: Mark inside marking channel.<br>
 :bookmark_tabs: create a "10 char buffer", and rank each character in pixel column.
 
+### Limitations
+As we store ascii values inside the encoding channel, there is a need for a variety of color in the image.<br>
+Could encode upto:<br>
+10 characters per column = cc<br>
+Num of Characters = 10 * lines = n <br>
+Avg. of words: <br> $` cc * n / 4.7 `$
+
+
 
 ### Installation
 1. <b>Install Open-CV : </b><br>
