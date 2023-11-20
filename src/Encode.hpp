@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <thread>
+#include <mutex>
 #include <opencv2/core/mat.hpp>
 
 enum  Channel{
@@ -24,7 +25,7 @@ public:
 Encode(cv::Mat image,std::string msg,std::string fileName,int numOfThreads = std::thread::hardware_concurrency(),
 Channel encChan = Channel::RED,Channel markChan = Channel::GREEN,Channel rankChan = Channel::BLUE);
 
-
+cv::Mat getImage();
 
 
 private:
@@ -32,6 +33,7 @@ private:
     std::string _fileName;
     std::string _messageToEncode;
     int _numOfThreads;
+    std::mutex _mtx;
     
     Channel encodeChan;
     Channel markingChan;

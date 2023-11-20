@@ -6,25 +6,33 @@
 
 int main(int argc, char** argv )
 {
-    if ( argc != 2 )
+    if ( argc < 3 )
     {
         printf("usage: DisplayImage.out <Image_Path>\n");
         return -1;
     }
     cv::Mat image;
-    image = cv::imread( argv[1], cv::IMREAD_COLOR );
+    image = cv::imread( argv[1], cv::IMREAD_COLOR);
     if ( !image.data )
     {
         printf("No image data \n");
         return -1;
     }
 
-    
-        Encode enc(image,"what the fucking hell is this","lena.png");
-        //Decode dec(image);
-    
-    
+        /*
+        Flags:
+        -i : image path
+        -e : encode image
+        -d : decode image
+        -t : file path to read
 
+        */
+        
+        //Encode enc(image,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum","lena.png");
+        Decode dec(image);
+        //Decode dec(enc.getImage());
+
+        
 
     
     //namedWindow("Display Image", WINDOW_AUTOSIZE );

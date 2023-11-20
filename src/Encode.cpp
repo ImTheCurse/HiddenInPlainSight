@@ -13,7 +13,7 @@ Encode::Encode(cv::Mat image,std::string msg,std::string fileName,int numOfThrea
 {
 
     initMarkingChannel();
-
+    
     
     int numOfCols = _img.cols;
     int currentCol = 0;
@@ -59,6 +59,11 @@ Encode::Encode(cv::Mat image,std::string msg,std::string fileName,int numOfThrea
 
 }
 
+cv::Mat Encode::getImage()
+{
+    return _img;
+}
+
 void Encode::encodeTenPixels(const int col, std::string tenCharString)
 {
     for(int i = 0;i < 10;i++){
@@ -83,13 +88,13 @@ void Encode::encodeSinglePixel(const int col, char c,int charIndex)
 
 void Encode::writeToImage()
 {
-    std::vector<int> compression_params;
-    compression_params.push_back(cv::IMWRITE_PNG_COMPRESSION);
-    compression_params.push_back(0);
-    compression_params.push_back(cv::IMWRITE_PNG_STRATEGY_RLE);
-    compression_params.push_back(1);
+    //std::vector<int> compression_params;
+    //compression_params.push_back(cv::IMWRITE_PNG_COMPRESSION);
+    //compression_params.push_back(0);
+    //compression_params.push_back(cv::IMWRITE_PNG_STRATEGY_RLE);
+    //compression_params.push_back(1);
     
-    cv::imwrite("enc_"+_fileName,_img,compression_params);
+    cv::imwrite("enc_"+_fileName,_img);
 
 }
 
@@ -117,8 +122,11 @@ void Encode::initMarkingChannel()
 
 void Encode::setPixelToAscii(const Point cord,char c)
 {
-    _img.at<cv::Vec3b>(cord.x,cord.y).val[encodeChan] = c;
+    {
+    std::lock_guard<std::mutex> lck (_mtx);
+    _img.at<cv::Vec3b>(cord.y,cord.x).val[encodeChan] = c;
     markPixel(cord);
+    }
 }
 
 void Encode::markPixel(const Point cord)
@@ -130,7 +138,7 @@ void Encode::markPixel(const Point cord)
     if(channelVal < RGB_CHANNEL_LIMIT){
         channelVal++;
     }
-    _img.at<cv::Vec3b>(cord.y,cord.x).val[markingChan] = channelVal;
+    _img.at<cv::Vec3b>(cord.y,cord.x).val[markingChan] = channelVal; 
 
 
 }
@@ -147,6 +155,7 @@ void Encode::rankPixel(const Point cord, const int posInStringBatch)
     }
     pix.val[rankingChan] += posInStringBatch;
     _img.at<cv::Vec3b>(cord.y,cord.x) = pix;
+    
 
 }
 
