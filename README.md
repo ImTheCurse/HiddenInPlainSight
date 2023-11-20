@@ -47,7 +47,7 @@ make
 
 encoding image example:
 ```
-./HIPS -i images/newroad.png -f test.txt -e
+./HIPS -i images/lena.png -f test.txt -e
 ```
 ```
 ./HIPS -i images/newroad.png -m "this is amazing!" -e
@@ -56,7 +56,7 @@ decoding image example:
 ```
 ./HIPS -i enc_file.png -d
 ```
-Decoded file will be saved to HiddenInPlainSight directory.
+Encoded image and Decoded file will be saved to results directory.
 
 ## Disclaimer
 

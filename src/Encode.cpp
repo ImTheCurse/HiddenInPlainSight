@@ -94,7 +94,7 @@ void Encode::writeToImage()
     //compression_params.push_back(cv::IMWRITE_PNG_STRATEGY_RLE);
     //compression_params.push_back(1);
     
-    cv::imwrite("enc_"+_fileName,_img);
+    cv::imwrite("results/enc_"+_fileName,_img);
 
 }
 

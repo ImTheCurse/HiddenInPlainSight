@@ -1,4 +1,5 @@
 #include "Decode.hpp"
+#include <fstream>
 #define MAX_RANK_AMOUNT 10
 
 Decode::Decode(cv::Mat image, Channel encodingChannel, Channel markingChannel, Channel rankingChannel) : _img(image),_encodeChannel(encodingChannel)
@@ -7,6 +8,10 @@ Decode::Decode(cv::Mat image, Channel encodingChannel, Channel markingChannel, C
     setDataToUnsortedCharVal();
     setDataToDecodedString();
     std::cout<<_decodedString<<std::endl;
+
+    std::ofstream outfile ("results/decodedMessage.txt");
+    outfile <<_decodedString<< std::endl;
+    outfile.close();
 
 
 }
