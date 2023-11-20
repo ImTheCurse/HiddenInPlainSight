@@ -17,12 +17,12 @@ and run the following command in the CLI:
 sudo apt-install libopencv-dev
 ```
 2. clone to chossen folder and compile the program:
-   ```
-   git clone https://github.com/ImTheCurse/HiddenInPlainSight.git
-   cd HiddenInPlainSight
-   cmake .
-   make
-   ```
+```
+git clone https://github.com/ImTheCurse/HiddenInPlainSight.git
+cd HiddenInPlainSight
+cmake .
+make
+```
 ### Running the Program
 1. Place .png file to encode inside ```images``` folder.
 2. Place text file(or any other file that you can read from) inside ```textFile``` folder.
