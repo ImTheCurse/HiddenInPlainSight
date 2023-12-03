@@ -24,7 +24,7 @@ and run the following command in the CLI:
 ```
 sudo apt-install libopencv-dev
 ```
-2. clone to chossen folder and compile the program:
+2. clone to chosen folder and compile the program:
 ```
 git clone https://github.com/ImTheCurse/HiddenInPlainSight.git
 cd HiddenInPlainSight
